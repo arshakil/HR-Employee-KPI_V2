@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- this template link will work for only website -->
+
+    <!--	<template id="style1_assets_frontend" inherit_id="web.assets_frontend" name="Style">-->
+    <!--		<xpath expr="." position="inside">-->
+    <!--             <link href="/hr_employee_kpi/static/src/css/customStyle.css" rel="stylesheet" type="text/css"/>-->
+    <!--		</xpath>-->
+    <!--	</template>-->
+
+
+    <!--	this one for all custom module for backend, except website-->
+
+    <template id="custom_assets_employee_kpi" name="custom bar assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/hr_employee_kpi/static/src/css/customStyle.css" rel="stylesheet" type="text/css"/>
+        </xpath>
+    </template>
+
+</odoo>

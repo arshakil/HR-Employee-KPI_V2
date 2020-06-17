@@ -1,0 +1,62 @@
+<odoo>
+
+    <!-- views -->
+
+    <!-- form views begin -->
+    <record id="employee_kpi_assign_form" model="ir.ui.view">
+        <field name="name">employee_kpi.assign.form</field>
+        <field name="model">employee_kpi.assign</field>
+        <field name="arch" type="xml">
+            <form string="Employee Kpi Assign Form">
+                <!--  -->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="job_title"/>
+                             <field name="kpi_title"/>
+
+                        </group>
+                    </group>
+
+
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- form view end -->
+
+
+    <!-- Tree views begin -->
+    <record id="employee_kpi_assign_tree" model="ir.ui.view">
+        <field name="name">employee_kpi.assign.tree</field>
+        <field name="model">employee_kpi.assign</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Kpi Assign Tree">
+
+                <field name="job_title"/>
+                 <field name="kpi_title"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Tree view end -->
+
+
+    <!-- end views -->
+
+
+    <!-- action of the manufacturer menu -->
+    <record id="action_employee_kpi_assign" model="ir.actions.act_window">
+        <field name="name">Employee KPI</field>
+        <field name="res_model">employee_kpi.assign</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+               Assign Employee KPIs for Job Title!
+            </p>
+        </field>
+    </record>
+
+<menuitem id="employee_kpi_configuration" name="Configuration" parent="employee_kpi_root" action="hr_employee_kpi.action_employee_kpi_assign" sequence="2"/>
+</odoo>

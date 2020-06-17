@@ -1,0 +1,160 @@
+<odoo>
+
+    <!-- views -->
+
+    <!-- form views begin -->
+    <record id="employee_kpi_form" model="ir.ui.view">
+        <field name="name">employee_kpi.employee_kpi.form</field>
+        <field name="model">hr.employee.kpi</field>
+        <field name="arch" type="xml">
+            <form string="Employee Kpi Form">
+                <!--  -->
+
+                <header>
+
+                    <button string="Approved" type="object" name="action_approved" states="draft"
+                            class="oe_highlight" groups="base.group_erp_manager"/>
+                    <button string="Refuse" type="object" name="action_refuse" states="approved" class="oe_highlight"
+                            groups="base.group_erp_manager"/>
+                    <button string="Cancel" type="object" name="action_cancel" states="refuse" class="oe_highlight"
+                            groups="base.group_erp_manager"/>
+
+                    <!--                    <button string="Cancel" type="object" name="action_cancel" states="confirm,done" class="oe_highlight"/>-->
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="department"/>
+                        </group>
+                        <group>
+                            <field name="job_title"/>
+                            <field name="valid_from"/>
+                            <field name="valid_to"/>
+
+
+                            <field name="total_weight" invisible="1"/>
+                        </group>
+                    </group>
+
+
+                    <notebook>
+                        <page string="KPI">
+
+
+                            <field name="employee_kpi_lines">
+                                <tree editable="bottom">
+                                    <field name="kpi_title" required="True"/>
+                                    <field name="measurement"/>
+                                    <field name="target" class="o_text_align_left"/>
+                                    <field name="actual" class="o_text_align_left"/>
+                                    <field name="unit"/>
+
+
+                                    <field name="achievement_rate" class="o_text_align_left" type="char"/>
+                                    <field name="weight" class="o_text_align_left" widget='monetary'
+                                           options="{'currency_field': 'currency_id'}" readonly="False" type="char"/>
+                                    <!--                                    <field name="kpi_value" class="o_text_align_left" type="char"/>-->
+                                    <field name="kpi_value" widget='monetary'
+                                           options="{'currency_field': 'currency_id'}" readonly="True" type="char"/>
+
+                                    <!--                                    extra for getting total-->
+                                    <field name="set_kpi_value" widget='monetary'
+                                           options="{'currency_field': 'currency_id'}" readonly="False" invisible="1"/>
+
+                                    <field name="employee_kpi_id" invisible="1"/>
+                                </tree>
+
+
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="kpi_title"/>
+                                            <field name="measurement"/>
+                                            <field name="target" class="o_text_align_left" type="char"/>
+                                            <field name="actual" class="o_text_align_left" type="char"/>
+
+                                            <field name="achievement_rate" class="o_text_align_left" type="char"/>
+                                            <field name="weight" class="o_text_align_left" type="char"/>
+                                            <field name="kpi_value" class="o_text_align_left" type="char"/>
+
+                                            <field name="unit"/>
+                                            <field name="employee_kpi_id" invisible="1"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+
+                            <!--                            Total Value  -->
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="Total">
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="kpi_val_total"/>
+                                </div>
+                                <field name="kpi_val_total" nolabel="1" class="oe_subtotal_footer_separator"
+                                       widget="monetary"/>
+                            </group>
+
+
+                            <!---->
+                        </page>
+
+
+                    </notebook>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- form view end -->
+
+
+    <!-- Tree views begin -->
+    <record id="employee_kpi_tree" model="ir.ui.view">
+        <field name="name">employee_kpi.employee_kpi.tree</field>
+        <field name="model">hr.employee.kpi</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Kpi Tree">
+
+                <field name="employee_id"/>
+                <field name="job_title"/>
+                <field name="valid_from"/>
+                <field name="valid_to"/>
+                <field name="employee_kpi_lines"/>
+                <field name="kpi_val_total" type="char"/>
+                <field name="state"/>
+
+            </tree>
+        </field>
+    </record>
+    <!-- Tree view end -->
+
+
+    <!-- end views -->
+
+
+    <!-- action of the manufacturer menu -->
+    <record id="action_employee_kpi" model="ir.actions.act_window">
+        <field name="name">Employee KPI</field>
+        <field name="res_model">hr.employee.kpi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Please Create First Employee KPI !
+            </p>
+        </field>
+    </record>
+
+
+    <!-- MenuItems -->
+    <menuitem id="employee_kpi_root" name="Employees KPI" action="" sequence="76" groups="base.group_user"/>
+    <menuitem id="employee_kpi" name="Employee KPI" parent="employee_kpi_root" action="action_employee_kpi" sequence="1"
+              groups="base.group_user"/>
+
+    <!--    <menuitem id="employee_kpi_configuration" name="Configuration" parent="employee_kpi_root" action="employee_kpi.action_employee_kpi_assign" sequence="2" groups="base.group_erp_manager"/>-->
+
+
+</odoo>
